@@ -1,0 +1,131 @@
+html {
+	font-size: 100px;
+}
+body {
+	margin: 0;
+	padding: 0;
+	/*background: linear-gradient(90deg, #9D50BB 10%, #6E48AA 90%);*/
+	background: #f3f3f3;
+}
+/*头部*/
+.theme {
+	margin: 0.1rem 0;
+	font-size: 0.14rem;
+}
+.theme textarea {
+	height: 0.6rem;
+	width: 93%;
+	border: none;
+	font-size: 0.14rem;
+	padding: 0.1rem;
+}
+
+.youngCard {
+	font-size: 0.44rem;
+	background-color: #fff;
+	padding: 10px;
+    margin: 0.1rem 0.07rem;
+}
+.oldCard {
+	position: relative;
+	padding: 0.46rem 0.1rem 0.2rem;
+	margin: 0.1rem 0.07rem;
+	background-color: #fff;
+}
+.oldCard select {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	font-size: 0.2rem;
+	padding: 0.06rem;
+	border-radius: 0.06rem;
+}
+.delete {
+	display: block;
+	position: absolute;
+	right: 0.05rem;
+	top: 0.05rem;
+	width: 0.3rem;
+	height: 0.3rem;
+	text-decoration: none;
+	background-size: 30px;
+	background-image: url(../images/delete1.png);
+}
+.optionDescription {
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+	height: 0.25rem;
+	border: none;
+	border-bottom: 1px #666 solid;
+	font-size: 0.16rem;
+}
+.btn-primary {
+	font-size: 0.16rem;
+	text-decoration: none;
+	color: #666;
+	border: 0.01rem solid #666;
+	padding: 0.06rem 0.1rem;
+	border-radius: 0.04rem;
+}
+.addOption, .finish {
+	margin-left: 10%;
+}
+.addVoteBtn {
+    display: block;
+	text-align: center;
+    margin: 0.2rem 2% 0;
+    padding: 0.1rem;
+}
+
+.footer {
+	text-align: center;
+	padding: 0.16rem;
+	margin-top: 0.3rem;
+	background: rgba(255, 255, 255, 0.2);
+}
+.share {
+	font-size: 0.2rem;
+	padding: 0.08rem;
+	text-decoration: none;
+	color: #333;
+	border-radius: 2rem;
+	border: 0.01rem solid #333;
+	width: 70%;
+	display: block;
+	margin: 0 auto;
+}
+.share:hover {
+	background-color: #fff;
+	color: #1B9AF7;
+}
+.forSharpCorner {
+	position: relative;
+	display: none;
+}
+#shareToWeChatBox {
+	position: absolute;
+	bottom: 0.40rem;
+	z-index: 99;
+	left: 50%;
+	margin-left: -1rem;
+	border: 0.01rem solid red;
+	padding: 0.1rem;
+	background: #fff;
+	border-radius: 0.17rem;
+}
+.a, .b {
+	position: absolute;
+	border: 0.2rem solid transparent;
+	border-top: 0.3rem solid red;
+	width: 0;
+	height: 0;
+	bottom: -0.08rem;
+	left: 50%;
+	margin-left: -0.2rem;
+}
+.b {
+	border-top: 0.3rem solid #fff;
+	bottom: -0.06rem;
+	z-index: 100;
+}
