@@ -2,11 +2,20 @@ import React from 'react'
 import {render} from 'react-dom'
 // import {OptionDescription, AddOption, FinishBtn, Option} from './components.js'
 
+// 该类投票项的描述
+var Description = React.createClass({
+	render: function () {
+		return (
+			<input className="onlyBottomBorderInput description" placeholder="请填写该类投票项描述" onChange={this.props.handleChange}/>
+		)
+	}
+});
+
 // 选项1、选项2....
 var OptionDescription = React.createClass({
 	render: function () {
 		return (
-			<input className="optionDescription" placeholder={this.props.placeholder} serialNumber={this.props.serialNumber} onChange={this.props.handleChange}/>
+			<input className="optionDescription onlyBottomBorderInput" placeholder={this.props.placeholder} serialNumber={this.props.serialNumber} onChange={this.props.handleChange}/>
 		)
 	}
 });
@@ -51,6 +60,7 @@ var YoungCard = React.createClass({
 	getInitialState: function () {
 		return {
 			total: 2,
+			description: '不填描述投个j b!',
 			optionValueArr: [],
 			finish: false
 		}
@@ -59,6 +69,11 @@ var YoungCard = React.createClass({
 		this.setState({
 			total: this.state.total+1
 		});
+	},
+	descriptionChange: function (e) {
+		this.setState({
+			description: e.target.value
+		})
 	},
 	optionDescriptionChange: function (e) {
 		let i = parseInt(e.target.getAttribute('placeholder').slice(2), 10);
@@ -82,6 +97,7 @@ var YoungCard = React.createClass({
 			return (
 				<div className="oldCard">
 					<a href="javascript:;" className="delete" onClick={this.delete}></a>
+					<div className="oldDescription">{this.state.description}</div>
 					<select>
 						{optionNodes}
 					</select>
@@ -95,6 +111,7 @@ var YoungCard = React.createClass({
 			}
 			return (
 				<div className="youngCard">
+					<Description handleChange={this.descriptionChange}/>
 					{optionNodes}
 					<AddOption handleClick={this.addOption}>添加选项</AddOption>
 					<FinishBtn handleClick={this.finish}>完成</FinishBtn>

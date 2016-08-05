@@ -8,10 +8,9 @@ let App = React.createClass({
 	componentDidMount() {
 		// 点击body任意一处（二维码中除外），隐藏二维码
 		var body = document.querySelector('body');
-		var forSharpCorner = document.querySelector('.forSharpCorner');
 		body.onclick = function (e) {
+			var forSharpCorner = document.querySelector('.forSharpCorner');
 			if (e.target.id !== 'shareToWeChatBox' && e.target.className !== 'share') {
-				var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 				forSharpCorner.style.display = 'none';
 			}
 			// e.stopPropagation();

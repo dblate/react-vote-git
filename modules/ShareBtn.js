@@ -1,5 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
+import Ajax from './Ajax.js'
 // import QRCode from './qrcode.js'
 var QRCode = require('./qrcode.js')
 
@@ -11,6 +12,7 @@ var ShareBtn = React.createClass({
 		}
 	},
 	shareToWeChat: function () {
+		// 弹出二维码
 		var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 		var forSharpCorner = document.querySelector('.forSharpCorner');
 		if (!this.state.hasMadeQrcode) {
@@ -25,6 +27,26 @@ var ShareBtn = React.createClass({
 			});
 		}
 		forSharpCorner.style.display = 'block';
+
+		// 发送数据到服务器
+		var $ = document.querySelector;
+		var $$ = document.querySelectorAll;
+		var postData = {};
+		postData.theme = $('.theme textarea').value();
+		$$('.oldCard').forEach(function (item, index, arr) {
+			let tempObj = {};
+			let tempArr = [];
+			let options = item.querySelectorAll('option');
+			options.map(function (item) {
+				item.innerText
+			});
+			tempArr.push(options.map((item) => {item.innerText}));
+			tempObj.optionArr = options.map((item) => {item.innerText})
+			tempObj.description = item.querySelector('.oldDescription').innerText;
+
+
+		})
+		postData.voteCards = []
 	},
 	render: function () {
 		return (

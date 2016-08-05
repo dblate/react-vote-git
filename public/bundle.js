@@ -69,10 +69,9 @@
 		componentDidMount: function componentDidMount() {
 			// 点击body任意一处（二维码中除外），隐藏二维码
 			var body = document.querySelector('body');
-			var forSharpCorner = document.querySelector('.forSharpCorner');
 			body.onclick = function (e) {
+				var forSharpCorner = document.querySelector('.forSharpCorner');
 				if (e.target.id !== 'shareToWeChatBox' && e.target.className !== 'share') {
-					var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 					forSharpCorner.style.display = 'none';
 				}
 				// e.stopPropagation();
@@ -25495,12 +25494,21 @@
 
 	// import {OptionDescription, AddOption, FinishBtn, Option} from './components.js'
 
+	// 该类投票项的描述
+	var Description = _react2.default.createClass({
+		displayName: 'Description',
+
+		render: function render() {
+			return _react2.default.createElement('input', { className: 'onlyBottomBorderInput description', placeholder: '请填写该类投票项描述', onChange: this.props.handleChange });
+		}
+	});
+
 	// 选项1、选项2....
 	var OptionDescription = _react2.default.createClass({
 		displayName: 'OptionDescription',
 
 		render: function render() {
-			return _react2.default.createElement('input', { className: 'optionDescription', placeholder: this.props.placeholder, serialNumber: this.props.serialNumber, onChange: this.props.handleChange });
+			return _react2.default.createElement('input', { className: 'optionDescription onlyBottomBorderInput', placeholder: this.props.placeholder, serialNumber: this.props.serialNumber, onChange: this.props.handleChange });
 		}
 	});
 
@@ -25562,6 +25570,7 @@
 		getInitialState: function getInitialState() {
 			return {
 				total: 2,
+				description: '不填描述投个j b!',
 				optionValueArr: [],
 				finish: false
 			};
@@ -25569,6 +25578,11 @@
 		addOption: function addOption() {
 			this.setState({
 				total: this.state.total + 1
+			});
+		},
+		descriptionChange: function descriptionChange(e) {
+			this.setState({
+				description: e.target.value
 			});
 		},
 		optionDescriptionChange: function optionDescriptionChange(e) {
@@ -25599,6 +25613,11 @@
 					{ className: 'oldCard' },
 					_react2.default.createElement('a', { href: 'javascript:;', className: 'delete', onClick: this.delete }),
 					_react2.default.createElement(
+						'div',
+						{ className: 'oldDescription' },
+						this.state.description
+					),
+					_react2.default.createElement(
 						'select',
 						null,
 						optionNodes
@@ -25613,6 +25632,7 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'youngCard' },
+					_react2.default.createElement(Description, { handleChange: this.descriptionChange }),
 					_optionNodes,
 					_react2.default.createElement(
 						AddOption,
