@@ -25416,15 +25416,15 @@
 
 	var _ShareBtn2 = _interopRequireDefault(_ShareBtn);
 
-	var _AddVoteBtn = __webpack_require__(227);
+	var _AddVoteBtn = __webpack_require__(228);
 
 	var _AddVoteBtn2 = _interopRequireDefault(_AddVoteBtn);
 
-	var _Header = __webpack_require__(228);
+	var _Header = __webpack_require__(229);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Footer = __webpack_require__(229);
+	var _Footer = __webpack_require__(230);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -25667,10 +25667,14 @@
 
 	var _reactDom = __webpack_require__(158);
 
+	var _Ajax = __webpack_require__(226);
+
+	var _Ajax2 = _interopRequireDefault(_Ajax);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// import QRCode from './qrcode.js'
-	var QRCode = __webpack_require__(226);
+	var QRCode = __webpack_require__(227);
 
 	// 分享按钮
 	var ShareBtn = _react2.default.createClass({
@@ -25682,6 +25686,8 @@
 			};
 		},
 		shareToWeChat: function shareToWeChat() {
+			console.log('go shareToWeChat');
+			// 弹出二维码
 			var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 			var forSharpCorner = document.querySelector('.forSharpCorner');
 			if (!this.state.hasMadeQrcode) {
@@ -25696,6 +25702,37 @@
 				});
 			}
 			forSharpCorner.style.display = 'block';
+
+			// 发送数据到服务器
+			// var $ = document.querySelector;
+			// var $$ = document.querySelectorAll;
+			var postData = {};
+			postData.theme = document.querySelector('.theme textarea').value;
+			postData.cards = [];
+			document.querySelectorAll('.oldCard').forEach(function (item, index, arr) {
+				var tempObj = {};
+				// let tempArr = [];
+				var options = Array.from(item.querySelectorAll('option'));
+				// tempArr.push(options.map((item) => {item.innerText}));
+				tempObj.optionArr = options.map(function (item) {
+					return item.innerText;
+				});
+				tempObj.description = item.querySelector('.oldDescription').innerText;
+				postData.cards.push(tempObj);
+			});
+
+			var shareAjax = new _Ajax2.default({
+				url: '/operation/share',
+				type: 'POST',
+				data: {
+					data: postData
+				},
+				success: function success() {},
+				error: function error() {
+					alert('分享出错..联系研发哥哥..');
+				}
+			});
+			console.log('in shareBtn I hava new ajax');
 		},
 		render: function render() {
 			return _react2.default.createElement(
@@ -25710,6 +25747,73 @@
 
 /***/ },
 /* 226 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Ajax = function () {
+		function Ajax(obj) {
+			_classCallCheck(this, Ajax);
+
+			console.log('go Ajax');
+			var xmlhttp = new XMLHttpRequest();
+			var type = obj.type.toLowerCase();
+			if (type === 'get') {
+				xmlhttp.open('GET', obj.url, true);
+				xmlhttp.send();
+				xmlhttp.onreadystatechange = function () {
+					if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+						obj.success && obj.success();
+					} else {
+						obj.error && obj.error();
+					}
+				};
+			} else if (type === 'post') {
+				xmlhttp.open('POST', obj.url, true);
+				xmlhttp.setRequestHeader('Content-type', 'application/json');
+				var postData = this.makePostDataStr(obj.data);
+				console.dir(obj.data);
+				var testData = 'description=1&option[1]=2&option[2]=3';
+				xmlhttp.send(testData);
+				xmlhttp.onreadystatechange = function () {
+					if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+						obj.success && obj.success();
+					} else {
+						obj.error && obj.error();
+					}
+				};
+			}
+		}
+
+		_createClass(Ajax, [{
+			key: 'makePostDataStr',
+			value: function makePostDataStr(dataObj) {
+				var postDataStr = '';
+				for (var item in dataObj) {
+					postDataStr += item + '=' + dataObj[item] + '&';
+				}
+				// 去除最后一个&
+				postDataStr.slice(0, -1);
+
+				return postDataStr;
+			}
+		}]);
+
+		return Ajax;
+	}();
+
+	exports.default = Ajax;
+
+/***/ },
+/* 227 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26711,7 +26815,7 @@
 	module.exports = QRCode;
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26743,7 +26847,7 @@
 	exports.default = AddVoteBtn;
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26779,7 +26883,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -25,13 +25,13 @@ function average (arr) {
 
 // 前端分享，后端创建投票页
 app.post('/operation/share', function (req, res) {
-	console.log(req.body);
+	console.dir(req.query);
 });
 
 // 提交投票
 var resultPageData = [];
 app.post('/operation/vote', function (req, res) {
-	var	result = req.param('result')
+	var	result = req.params.result;
 	resultPageData.forEach(function (item, index, arr) {
 		if (item && item.description === result.description) {
 			// 已有时，追加value值，以及改变total和average的值

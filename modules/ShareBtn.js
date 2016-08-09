@@ -12,6 +12,7 @@ var ShareBtn = React.createClass({
 		}
 	},
 	shareToWeChat: function () {
+		console.log('go shareToWeChat');
 		// 弹出二维码
 		var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 		var forSharpCorner = document.querySelector('.forSharpCorner');
@@ -29,23 +30,23 @@ var ShareBtn = React.createClass({
 		forSharpCorner.style.display = 'block';
 
 		// 发送数据到服务器
-		var $ = document.querySelector;
-		var $$ = document.querySelectorAll;
+		// var $ = document.querySelector;
+		// var $$ = document.querySelectorAll;
 		var postData = {};
-		postData.theme = $('.theme textarea').value();
+		postData.theme = document.querySelector('.theme textarea').value;
 		postData.cards = [];
-		$$('.oldCard').forEach(function (item, index, arr) {
+		document.querySelectorAll('.oldCard').forEach(function (item, index, arr) {
 			let tempObj = {};
 			// let tempArr = [];
-			let options = item.querySelectorAll('option');
+			let options = Array.from(item.querySelectorAll('option'));
 			// tempArr.push(options.map((item) => {item.innerText}));
-			tempObj.optionArr = options.map((item) => {item.innerText})
+			tempObj.optionArr = options.map((item) => {return item.innerText})
 			tempObj.description = item.querySelector('.oldDescription').innerText;
 			postData.cards.push(tempObj);
 		});
 
 		var shareAjax = new Ajax({
-			url: '/option/share',
+			url: '/operation/share',
 			type: 'POST',
 			data: {
 				data: postData
@@ -54,7 +55,8 @@ var ShareBtn = React.createClass({
 			error: function () {
 				alert('分享出错..联系研发哥哥..');
 			}
-		})
+		});
+		console.log('in shareBtn I hava new ajax');
 	},
 	render: function () {
 		return (
