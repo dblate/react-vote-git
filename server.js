@@ -23,6 +23,11 @@ function average (arr) {
 	return (sum(arr)/arr.length).toFixed(2);
 }
 
+// 前端分享，后端创建投票页
+app.post('/operation/share', function (req, res) {
+	console.log(req.body);
+});
+
 // 提交投票
 var resultPageData = [];
 app.post('/operation/vote', function (req, res) {

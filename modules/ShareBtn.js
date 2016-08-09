@@ -33,20 +33,28 @@ var ShareBtn = React.createClass({
 		var $$ = document.querySelectorAll;
 		var postData = {};
 		postData.theme = $('.theme textarea').value();
+		postData.cards = [];
 		$$('.oldCard').forEach(function (item, index, arr) {
 			let tempObj = {};
-			let tempArr = [];
+			// let tempArr = [];
 			let options = item.querySelectorAll('option');
-			options.map(function (item) {
-				item.innerText
-			});
-			tempArr.push(options.map((item) => {item.innerText}));
+			// tempArr.push(options.map((item) => {item.innerText}));
 			tempObj.optionArr = options.map((item) => {item.innerText})
 			tempObj.description = item.querySelector('.oldDescription').innerText;
+			postData.cards.push(tempObj);
+		});
 
-
+		var shareAjax = new Ajax({
+			url: '/option/share',
+			type: 'POST',
+			data: {
+				data: postData
+			},
+			success: function () {},
+			error: function () {
+				alert('分享出错..联系研发哥哥..');
+			}
 		})
-		postData.voteCards = []
 	},
 	render: function () {
 		return (
