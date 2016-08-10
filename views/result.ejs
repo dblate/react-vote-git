@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+   	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>New React App</title>
+   	</head>
+   	<body>
+   		<table>
+   			<th>
+   				<td>投票项</td>
+   				<td>得分情况</td>
+   				<td>总计</td>
+   				<td>平均值</td>
+   			</th>
+   			<% result.forEach(function (item) { %>
+   				<tr>
+   					<td><%item.description%></td>
+   					<td><%item.value%></td>
+   					<td><%item.total%></td>
+   					<td><%item.average%></td>
+   				</tr>
+   			<% }) %>
+   		</table>
+
+   		<a href="javascript:;">投票</a>
+   	</body>
+</html>

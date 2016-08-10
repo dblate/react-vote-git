@@ -1,10 +1,13 @@
-var express = require('express')
-var path = require('path')
-var compression = require('compression')
+var express = require('express');
+var path = require('path');
+var compression = require('compression');
+var bodyParser = require('body-parser');
 
 var app = express()
 
-app.use(compression())
+app.use(compression());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // serve our static stuff like index.css
 app.use(express.static(path.join(__dirname, 'public')))
@@ -23,9 +26,16 @@ function average (arr) {
 	return (sum(arr)/arr.length).toFixed(2);
 }
 
+app.get('/operation/getTest', function (req, res) {
+	console.log('req.query.name=' + req.query.name);
+	res.send('nihao');
+});
+
 // 前端分享，后端创建投票页
 app.post('/operation/share', function (req, res) {
-	console.dir(req.query);
+	console.dir(req.body);
+	// res.render('votePage.ejs', {theme: req.body.theme});
+	res.send(req.body);
 });
 
 // 提交投票

@@ -2,7 +2,8 @@ import React from 'react'
 import {render} from 'react-dom'
 import Ajax from './Ajax.js'
 // import QRCode from './qrcode.js'
-var QRCode = require('./qrcode.js')
+var QRCode = require('./qrcode.js');
+var $ = require('./jquery-3.1.0.js');
 
 // 分享按钮
 var ShareBtn = React.createClass({
@@ -12,7 +13,6 @@ var ShareBtn = React.createClass({
 		}
 	},
 	shareToWeChat: function () {
-		console.log('go shareToWeChat');
 		// 弹出二维码
 		var shareToWeChatBox = document.querySelector('#shareToWeChatBox');
 		var forSharpCorner = document.querySelector('.forSharpCorner');
@@ -45,18 +45,32 @@ var ShareBtn = React.createClass({
 			postData.cards.push(tempObj);
 		});
 
-		var shareAjax = new Ajax({
-			url: '/operation/share',
+		$.ajax({
 			type: 'POST',
+			url: '/operation/share',
 			data: {
-				data: postData
+				theme: postData.theme,
+				cards: postData.cards
 			},
-			success: function () {},
+			success: function (res) {
+
+			},
 			error: function () {
-				alert('分享出错..联系研发哥哥..');
+
 			}
-		});
-		console.log('in shareBtn I hava new ajax');
+		})
+
+		// var shareAjax = new Ajax({
+		// 	url: '/operation/share',
+		// 	type: 'POST',
+		// 	data: {
+		// 		data: postData
+		// 	},
+		// 	success: function () {},
+		// 	error: function () {
+		// 		alert('分享出错..联系研发哥哥..');
+		// 	}
+		// });
 	},
 	render: function () {
 		return (
