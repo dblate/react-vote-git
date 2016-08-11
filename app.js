@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Router,Route,hashHistory,IndexRoute} from 'react-router';
 import CreateVotePageBtn from './modules/CreateVotePageBtn.js';
 import CreateVotePage from './modules/CreateVotePage.js'
+import VotePage from './modules/VotePage.js'
 
 let App = React.createClass({
 	componentDidMount() {
@@ -21,6 +22,7 @@ let App = React.createClass({
 			<Router history={hashHistory}>
 		      	<Route path="/" component={CreateVotePageBtn} />
 		        <Route path="CreateVotePage" component={CreateVotePage} />
+		        <Route path="VotePage" component={VotePage}>
 	      	</Router>
 		)
 	}

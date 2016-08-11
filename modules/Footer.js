@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import ShareBtn from './ShareBtn.js'
+import CompleteBtn from './CompleteBtn.js'
 
 var Footer = React.createClass({
 	render: function () {
@@ -10,7 +10,7 @@ var Footer = React.createClass({
 					<div id="shareToWeChatBox"></div>
 					<em className="a"></em><em className="b"></em>
 				</div>
-				<ShareBtn />
+				<CompleteBtn />
 			</div>
 		)
 	}
